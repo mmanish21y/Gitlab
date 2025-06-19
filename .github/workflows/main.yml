@@ -1,0 +1,35 @@
+name: Demo Deploy Stanza Database Scripts
+on:
+  workflow_dispatch:
+      inputs:
+        environment:
+            description: Environment to deploy to
+            required: true
+            type: environment
+        dbName:
+          description: 'Select the database folder to deploy'
+          required: true
+          type: choice
+          options:
+            - None
+            - Committee
+            - Identity
+          default: None
+permissions: read-all  
+
+jobs:
+  DB_Deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Execute database scripts filtered by DB folder name
+        env:
+          DB_NAME_INPUT: ${{ github.event.inputs.dbName }}
+          DB_USER: ${{ vars.DBUSERNAME }}
+          DB_HOST: ${{ vars.SERVERNAME }}
+          DB_USER1: ${{ vars.DB_USER }}
+          DB_HOST1: ${{ vars.HOST_NAME }}
+        run: |
+          set -e
+          echo "Deploying scripts for database folder: $DB_NAME_INPUT"
+         
