@@ -20,19 +20,18 @@ permissions: read-all
 jobs:
   DB_Deploy:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Execute database scripts filtered by DB folder name
         env:
           DB_NAME_INPUT: ${{ github.event.inputs.dbName }}
           DB_USER: ${{ vars.DBUSERNAME }}
           DB_HOST: ${{ vars.SERVERNAME }}
-          
+          DB_Password: ${{ secrets.DBPASSWORD }}
         run: |
-          set -e
           echo "Deploying DB_USER: $DB_USER"
           echo "Deploying DB_HOST: $DB_HOST"
-          echo "Deploying DB_HOST: " ${{ vars.DBUSERNAME }}
+          echo "Deploying DB_Password: $DB_Password"
+          echo "Deploying DB_USER: " ${{ vars.DBUSERNAME }}
           echo "Deploying DB_HOST: " ${{ vars.SERVERNAME }}
           echo "Deploying scripts for database folder: $DB_NAME_INPUT"
           
