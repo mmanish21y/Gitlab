@@ -27,9 +27,12 @@ jobs:
           DB_NAME_INPUT: ${{ github.event.inputs.dbName }}
           DB_USER: ${{ vars.DBUSERNAME }}
           DB_HOST: ${{ vars.SERVERNAME }}
-          DB_USER1: ${{ vars.DB_USER }}
-          DB_HOST1: ${{ vars.HOST_NAME }}
+          
         run: |
           set -e
+          echo "Deploying DB_USER: $DB_USER"
+          echo "Deploying DB_HOST: $DB_HOST"
+          echo "Deploying DB_HOST: " ${{ vars.DBUSERNAME }}
+          echo "Deploying DB_HOST: " ${{ vars.SERVERNAME }}
           echo "Deploying scripts for database folder: $DB_NAME_INPUT"
-         
+          
