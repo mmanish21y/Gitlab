@@ -18,14 +18,17 @@ on:
 permissions: read-all  
 
 jobs:
-  print-vars:
+  test-vars:
     runs-on: ubuntu-latest
+    env:
+      DUSER: ${{ vars.DBUSERNAME }}
+      DHOST: ${{ vars.SERVERNAME }}
+      DPASS: ${{ secrets.DBPASSWORD }}
+
     steps:
       - name: Print input and env variables
         run: |
-          DUSER=${{ vars.DBUSERNAME }}
-          DHOST=${{ vars.SERVERNAME }}
-          DPASS=${{ secrets.DBPASSWORD }}
+         
           echo "==============================="
           echo "DB Folder Name: ${{ github.event.inputs.dbName }}"
           echo "DB_USER: $DUSER"
