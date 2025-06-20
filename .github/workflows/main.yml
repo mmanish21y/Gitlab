@@ -29,6 +29,15 @@ jobs:
           DB_Password: ${{ secrets.DBPASSWORD }}
         run: |
           echo "Deploying DB_USER: $DB_USER"
+          if [[ "$DB_USER" == "mouser" ]]; then
+              echo "DB user exists"
+          if
+          if [[ "$DB_HOST" == "TestPGServer" ]]; then
+              echo "DB_HOST exists"
+          if
+          if [[ "$DB_Password" == "Test@123" ]]; then
+              echo "DB DB_Password exists"
+          if
           echo "Deploying DB_HOST: $DB_HOST"
           echo "Deploying DB_Password: $DB_Password"
           echo "Deploying DB_USER: " ${{ vars.DBUSERNAME }}
