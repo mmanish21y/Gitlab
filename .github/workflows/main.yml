@@ -18,26 +18,31 @@ on:
 permissions: read-all  
 
 jobs:
-  DB_Deploy:
+  print-vars:
     runs-on: ubuntu-latest
+    env:
+      # These should be defined in GitHub → Settings → Variables (not secrets)
+      DB_USER: ${{ vars.DBUSERNAME }}
+      DB_HOST: ${{ vars.SERVERNAME }}
+      DB_PASSWORD: ${{ vars.DBPASSWORD }} # If this is a secret, use `secrets.` instead
+
     steps:
-      - name: Execute database scripts filtered by DB folder name
-        env:
-          DB_NAME_INPUT: ${{ github.event.inputs.dbName }}
-          DB_USER: ${{ vars.DBUSERNAME }}
-          DB_HOST: ${{ vars.SERVERNAME }}
-          DB_Password: ${{ secrets.DBPASSWORD }}
+      - name: Print input and env variables
         run: |
-          echo "Deploying DB_USER: $DB_USER" ${{ vars.DBUSERNAME }}
-          if [[ "$DB_USER" == "mouser" ]]; then
-              echo "DB user exists"
-          fi
-          if [[ "$DB_HOST" != "TestPGServer" ]]; then
-              echo "DB_HOST exists"
-          fi
-          if [[ "$DB_Password" == "Test@123" ]]; then
-              echo "DB DB_Password exists"
-          fi
-         
-          echo "Deploying scripts for database folder: $DB_NAME_INPUT"
-          
+          echo "==============================="
+          echo "DB Folder Name: ${{ github.event.inputs.dbName }}"
+          echo "DB_USER: $DB_USER"
+          echo "DB_HOST: $DB_HOST"
+          echo "DB_PASSWORD: $DB_PASSWORD"
+          echo "==============================="
+
+      - name: List all environment variables (debugging)
+        run: printenv | sort
+
+
+
+
+
+
+
+
