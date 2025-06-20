@@ -21,7 +21,7 @@ jobs:
   test-vars:
     runs-on: ubuntu-latest
     env:
-      DUSER: ${{ var.DBUSERNAME }}
+      DUSER: ${{ vars.DBUSERNAME }}
       DHOST: ${{ vars.SERVERNAME }}
       DPASS: ${{ secrets.DBPASSWORD }}
 
