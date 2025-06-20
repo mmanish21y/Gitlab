@@ -20,29 +20,15 @@ permissions: read-all
 jobs:
   print-vars:
     runs-on: ubuntu-latest
-    env:
-      # These should be defined in GitHub → Settings → Variables (not secrets)
-      DB_USER: ${{ vars.DBUSERNAME }}
-      DB_HOST: ${{ vars.SERVERNAME }}
-      DB_PASSWORD: ${{ vars.DBPASSWORD }} # If this is a secret, use `secrets.` instead
-
     steps:
       - name: Print input and env variables
         run: |
+          DB_USER: ${{ vars.DBUSERNAME }}
+          DB_HOST: ${{ vars.SERVERNAME }}
+          DB_PASSWORD: ${{ vars.DBPASSWORD }}
           echo "==============================="
           echo "DB Folder Name: ${{ github.event.inputs.dbName }}"
           echo "DB_USER: $DB_USER"
           echo "DB_HOST: $DB_HOST"
           echo "DB_PASSWORD: $DB_PASSWORD"
           echo "==============================="
-
-      - name: List all environment variables (debugging)
-        run: printenv | sort
-
-
-
-
-
-
-
-
