@@ -23,12 +23,12 @@ jobs:
     steps:
       - name: Print input and env variables
         run: |
-          DB_USER=${{ vars.DBUSERNAME }}
-          DB_HOST=${{ vars.SERVERNAME }}
-          DB_PASSWORD=${{ vars.DBPASSWORD }}
+          DUSER=${{ vars.DBUSERNAME }}
+          DHOST=${{ vars.SERVERNAME }}
+          DPASS=${{ secrets.DBPASSWORD }}
           echo "==============================="
           echo "DB Folder Name: ${{ github.event.inputs.dbName }}"
-          echo "DB_USER: $DB_USER"
-          echo "DB_HOST: $DB_HOST"
-          echo "DB_PASSWORD: $DB_PASSWORD"
+          echo "DB_USER: $DUSER"
+          echo "DB_HOST: $DHOST"
+          echo "DB_PASSWORD: $DPASS"
           echo "==============================="
